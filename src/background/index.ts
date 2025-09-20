@@ -1,23 +1,15 @@
-console.log('ChatGPTMonitor loaded');
-
-chrome.runtime.onInstalled.addListener(() => {
-  console.log(`ChatGPTMonitor installed ${new Date().toString()}`);
-
-  chrome.storage.sync.set({
-    enabled: true,
-  });
-});
-
-chrome.action.onClicked.addListener(tab => {
-  console.log('Extension icon clicked for tab:', tab.id);
-});
-
-chrome.storage.onChanged.addListener((changes, namespace) => {
-  if (namespace === 'sync') {
-    console.log('Storage changed:', changes);
-  }
-});
+import { clearBadgeError, setBadgeError } from "@/background/badge-helper";
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log('Message received:', request, sender, sendResponse);
+  console.log('Action received:', request);
+
+  const tabId = sender.tab?.id;
+  switch (request.type) {
+    case 'EMAIL_DETECTED': setBadgeError(tabId); break;
+    case 'EMAIL_NOT_DETECTED': clearBadgeError(tabId); break;
+    // other actions here
+  }
+
+  sendResponse({ received: true });
+  return true
 });

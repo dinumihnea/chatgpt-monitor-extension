@@ -1,95 +1,306 @@
+:root {
+    --primary-blue: #4860cf;
+    --primary-purple: #683d93;
+    --success-green: #4ade80;
+    --success-green-light: #86efac;
+    --error-red: #f87171;
+    --error-red-dark: #ff4444;
+    --error-red-light: #fca5a5;
+    --white: #ffffff;
+    --white-10: rgba(255, 255, 255, 0.1);
+    --white-20: rgba(255, 255, 255, 0.2);
+    --white-30: rgba(255, 255, 255, 0.3);
+    --white-50: rgba(255, 255, 255, 0.5);
+    --white-60: rgba(255, 255, 255, 0.6);
+    --white-90: rgba(255, 255, 255, 0.9);
+    --error-red-20: rgba(255, 68, 68, 0.2);
+    --error-red-30: rgba(255, 68, 68, 0.3);
+    --error-red-40: rgba(255, 68, 68, 0.4);
+    --error-red-50: rgba(255, 68, 68, 0.5);
+    --success-green-20: rgba(74, 222, 128, 0.2);
+    --success-green-30: rgba(74, 222, 128, 0.3);
+    --success-green-60: rgba(74, 222, 128, 0.6);
+    --error-113-20: rgba(248, 113, 113, 0.2);
+    --error-113-30: rgba(248, 113, 113, 0.3);
+    --error-113-60: rgba(248, 113, 113, 0.6);
+    --border-radius-small: 3px;
+    --border-radius-medium: 4px;
+    --border-radius-large: 6px;
+    --border-radius-xl: 8px;
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
 .app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(135deg, #4860cf 0%, #683d93 100%);
-  color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-purple) 100%);
+    color: var(--white);
+    overflow: hidden;
 }
 
 .app-header {
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    background: var(--white-10);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--white-20);
 }
 
 .app-header h1 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .app-main {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    flex: 1;
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
 }
 
 .status-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
 }
 
 .status-indicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .status-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+    width: var(--spacing-md);
+    height: var(--spacing-md);
+    border-radius: 50%;
+    transition: background-color var(--transition-normal);
 }
 
-.status-dot.enabled {
-  background-color: #4ade80;
-  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+.status-dot.ok {
+    background-color: var(--success-green);
+    box-shadow: 0 0 var(--spacing-sm) var(--success-green-60);
 }
 
-.status-dot.disabled {
-  background-color: #f87171;
-  box-shadow: 0 0 8px rgba(248, 113, 113, 0.6);
+.status-dot.error {
+    background-color: var(--error-red);
+    box-shadow: 0 0 var(--spacing-sm) var(--error-113-60);
 }
 
-.toggle-button {
-  padding: 10px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 100px;
+.email-detection-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
 }
 
-.toggle-button.enabled {
-  background-color: rgba(248, 113, 113, 0.2);
-  color: #fca5a5;
-  border: 1px solid rgba(248, 113, 113, 0.3);
+.email-detection-section h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white-90);
 }
 
-.toggle-button.enabled:hover {
-  background-color: rgba(248, 113, 113, 0.3);
+.email-warning {
+    background: var(--error-red-20);
+    border: 1px solid var(--error-red-40);
+    border-radius: var(--border-radius-xl);
+    padding: var(--spacing-md);
 }
 
-.toggle-button.disabled {
-  background-color: rgba(74, 222, 128, 0.2);
-  color: #86efac;
-  border: 1px solid rgba(74, 222, 128, 0.3);
+.warning-header {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: var(--spacing-sm);
+    color: var(--error-red-light);
 }
 
-.toggle-button.disabled:hover {
-  background-color: rgba(74, 222, 128, 0.3);
+.warning-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
+.detected-emails {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
 
+.email-item {
+    background: var(--white-10);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-medium);
+    font-size: 11px;
+    font-family: monospace;
+    word-break: break-all;
+}
 
+.detection-time {
+    font-size: 10px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+.history-section {
+    border-top: 1px solid var(--white-20);
+    padding-top: var(--spacing-lg);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: var(--spacing-sm) 0;
+    transition: opacity var(--transition-fast);
+}
+
+.history-header:hover {
+    opacity: 0.8;
+}
+
+.history-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white-90);
+}
+
+.toggle-arrow {
+    font-size: var(--spacing-md);
+    transition: transform var(--transition-fast);
+    color: var(--white-60);
+}
+
+.history-content {
+    padding-top: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.history-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-count {
+    font-size: 11px;
+    color: var(--white-60);
+}
+
+.clear-button {
+    background: var(--error-113-20);
+    border: 1px solid var(--error-113-30);
+    color: var(--error-red-light);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-medium);
+    font-size: 10px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.clear-button:hover {
+    background: var(--error-113-30);
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.history-list::-webkit-scrollbar {
+    width: var(--spacing-xs);
+}
+
+.history-list::-webkit-scrollbar-track {
+    background: var(--white-10);
+    border-radius: 2px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background: var(--white-30);
+    border-radius: 2px;
+}
+
+.no-events {
+    text-align: center;
+    color: var(--white-50);
+    font-size: var(--spacing-md);
+    padding: var(--spacing-lg);
+    font-style: italic;
+}
+
+.history-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-large);
+    padding: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.history-list .history-item:first-child {
+    border: 2px solid var(--white-90);
+}
+
+.event-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.event-icon {
+    font-size: var(--spacing-md);
+    width: var(--spacing-lg);
+    text-align: center;
+}
+
+.event-label {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white-90);
+}
+
+.event-time {
+    font-size: 9px;
+    color: var(--white-50);
+}
+
+.event-details {
+    padding-left: 24px;
+}
+
+.detected-emails-history {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+}
+
+.email-badge {
+    background: var(--error-red-30);
+    border: 1px solid var(--error-red-50);
+    padding: 2px 6px;
+    border-radius: var(--border-radius-small);
+    font-size: 9px;
+    font-family: monospace;
+    color: var(--error-red-light);
+}

@@ -1,41 +1,28 @@
 import React, { useState } from 'react';
 import './App.css';
+import { StatusDisplay } from './components/StatusDisplay';
+import { EventHistory } from './components/EventHistory';
 
 
 const App: React.FC = () => {
-  const [isEnabled, setIsEnabled] = useState(true);
+  const [showHistory, setShowHistory] = useState<boolean>(true);
 
-
-  const toggleEnabled = () => {
-    const newState = !isEnabled;
-    setIsEnabled(newState);
-    chrome.storage.sync.set({ enabled: newState });
+  const toggleHistory = () => {
+    setShowHistory(prev => !prev);
   };
 
   return (
-    <div className='app'>
-      <header className='app-header'>
+    <div className="app">
+      <div className="app-header">
         <h1>ChatGPT Monitor</h1>
-      </header>
-
-      <main className='app-main'>
-        <div className='status-section'>
-          <div className='status-indicator'>
-            <span className={`status-dot ${isEnabled ? 'enabled' : 'disabled'}`} />
-            <span className='status-text'>
-              {isEnabled ? 'Protection Active' : 'Protection Disabled'}
-            </span>
-          </div>
-
-          <button
-            className={`toggle-button ${isEnabled ? 'enabled' : 'disabled'}`}
-            onClick={toggleEnabled}
-          >
-            {isEnabled ? 'Disable' : 'Enable'}
-          </button>
-        </div>
-
-      </main>
+      </div>
+      <div className="app-main">
+        <StatusDisplay />
+        <EventHistory
+          isVisible={showHistory}
+          onToggle={toggleHistory}
+        />
+      </div>
     </div>
   );
 };
