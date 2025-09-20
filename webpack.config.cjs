@@ -25,6 +25,20 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name][ext]',
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]',
+        },
+      },
     ],
   },
   resolve: {
@@ -44,6 +58,10 @@ module.exports = {
         {
           from: 'public',
           to: '.',
+        },
+        {
+          from: 'src/assets',
+          to: 'assets',
         },
       ],
     }),
