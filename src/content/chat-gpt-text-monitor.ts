@@ -1,5 +1,5 @@
 import { extractText } from "@/shared/html-helpers";
-import { EmailDetectionData, HistoryEvent } from "@/shared/action-type";
+import { EmailDetectionData, HistoryEvent } from "@/shared/action-types";
 
 const EMAIL_REGEX = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
 const TEXTAREA_ID = 'prompt-textarea';

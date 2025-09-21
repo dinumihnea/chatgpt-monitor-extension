@@ -95,64 +95,6 @@
     box-shadow: 0 0 var(--spacing-sm) var(--success-green-60);
 }
 
-.status-dot.error {
-    background-color: var(--error-red);
-    box-shadow: 0 0 var(--spacing-sm) var(--error-113-60);
-}
-
-.email-detection-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.email-detection-section h3 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--white-90);
-}
-
-.email-warning {
-    background: var(--error-red-20);
-    border: 1px solid var(--error-red-40);
-    border-radius: var(--border-radius-xl);
-    padding: var(--spacing-md);
-}
-
-.warning-header {
-    font-weight: 600;
-    font-size: 13px;
-    margin-bottom: var(--spacing-sm);
-    color: var(--error-red-light);
-}
-
-.warning-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-}
-
-.detected-emails {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-}
-
-.email-item {
-    background: var(--white-10);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    border-radius: var(--border-radius-medium);
-    font-size: 11px;
-    font-family: monospace;
-    word-break: break-all;
-}
-
-.detection-time {
-    font-size: 10px;
-    opacity: 0.7;
-    text-align: right;
-}
 
 .history-section {
     border-top: 1px solid var(--white-20);

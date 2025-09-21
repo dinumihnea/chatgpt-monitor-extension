@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import { StatusDisplay } from './components/StatusDisplay';
-import { EventHistory } from './components/EventHistory';
-
+import { StatusDisplay } from './StatusDisplay';
+import { EventHistory } from './history/EventHistory';
+import { EventHistoryProvider } from './history/EventHistoryContext';
 
 const App: React.FC = () => {
   const [showHistory, setShowHistory] = useState<boolean>(true);
@@ -17,11 +17,13 @@ const App: React.FC = () => {
         <h1>ChatGPT Monitor</h1>
       </div>
       <div className="app-main">
-        <StatusDisplay />
-        <EventHistory
-          isVisible={showHistory}
-          onToggle={toggleHistory}
-        />
+        <StatusDisplay/>
+        <EventHistoryProvider>
+          <EventHistory
+            isVisible={showHistory}
+            onToggle={toggleHistory}
+          />
+        </EventHistoryProvider>
       </div>
     </div>
   );
