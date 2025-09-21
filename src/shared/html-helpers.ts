@@ -1,3 +1,6 @@
+/**
+ * Extracts text content from HTML elements (textarea value or textContent from divs)
+ */
 export function extractText(element?: HTMLElement | null) {
   if (!element) return '';
 

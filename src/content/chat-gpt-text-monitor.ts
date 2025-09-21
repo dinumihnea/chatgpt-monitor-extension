@@ -1,19 +1,42 @@
 import { extractText } from "@/shared/html-helpers";
-import { EmailDetectionData, HistoryEvent } from "@/shared/action-types";
+import type { EmailDetectionData, HistoryEvent } from "@/shared/action-types";
 
 const EMAIL_REGEX = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
 const TEXTAREA_ID = 'prompt-textarea';
 const SUBMIT_BUTTON_ID = 'composer-submit-button';
 
-export interface EmailDetectionEvent {
-  emails: string[];
-  text: string;
-  timestamp: number;
-}
-
+/**
+ * Monitors ChatGPT textarea for email addresses and prevents submission when detected
+ */
 export class ChatGPTEmailMonitor {
   private promptTextarea: HTMLElement | null = null;
   private observer: MutationObserver | null = null;
+
+  /**
+   * Starts monitoring ChatGPT textarea and submit button for email detection
+   */
+  public start(): void {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        this.findAndMonitorTextarea();
+        this.findAndMonitorSubmitButton();
+      });
+    } else {
+      this.findAndMonitorTextarea();
+      this.findAndMonitorSubmitButton();
+    }
+
+    this.startObservingLayoutChanges();
+  }
+
+  /**
+   * Cleans up event listeners and layout observer
+   */
+  public destroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
 
   private async persistEventToHistory(type: HistoryEvent['type'], data?: EmailDetectionData): Promise<void> {
     try {
@@ -38,20 +61,6 @@ export class ChatGPTEmailMonitor {
     } catch (error) {
       console.error('Failed to persist event to history:', error);
     }
-  }
-
-  public start(): void {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        this.findAndMonitorTextarea();
-        this.findAndMonitorSubmitButton();
-      });
-    } else {
-      this.findAndMonitorTextarea();
-      this.findAndMonitorSubmitButton();
-    }
-
-    this.startObservingLayoutChanges();
   }
 
   private findAndMonitorTextarea(): void {
@@ -79,6 +88,7 @@ export class ChatGPTEmailMonitor {
     }
   }
 
+
   private handleSubmit(event: UIEvent): void {
     const text = extractText(this.promptTextarea);
     if (!text) return;
@@ -97,13 +107,12 @@ export class ChatGPTEmailMonitor {
     }
   }
 
-
   private detectEmails(text: string): string[] {
     const matches = text.match(EMAIL_REGEX);
     return matches ? [...matches] : [];
   }
 
-  private async onEmailsDetected(event: UIEvent, emailDetectionEvent: EmailDetectionEvent): Promise<void> {
+  private async onEmailsDetected(event: UIEvent, emailDetectionEvent: EmailDetectionData): Promise<void> {
     event.preventDefault();
     event.stopPropagation();
     console.warn('🚨 ChatGPTMonitor: Email addresses detected in ChatGPT prompt!', emailDetectionEvent);
@@ -166,11 +175,5 @@ export class ChatGPTEmailMonitor {
     chrome.runtime.sendMessage({
       type: 'EMAIL_NOT_DETECTED',
     });
-  }
-
-  public destroy(): void {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
   }
 }
