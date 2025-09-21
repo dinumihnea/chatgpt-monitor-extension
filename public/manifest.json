@@ -7,10 +7,15 @@
     "activeTab",
     "storage"
   ],
+  "icons": {
+    "16": "assets/secure-icon16.png",
+    "32": "assets/secure-icon32.png",
+    "48": "assets/secure-icon48.png",
+    "128": "assets/secure-icon128.png"
+  },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "ChatGPTMonitor",
-    "default_icon": "assets/secure-icon.png"
+    "default_title": "ChatGPTMonitor"
   },
   "background": {
     "service_worker": "background.js"
