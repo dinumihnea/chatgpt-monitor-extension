@@ -18,7 +18,7 @@ The extension operates through three main components:
 
 1. **Content Script**: Monitors the ChatGPT textarea and submit button for email patterns
 2. **Background Script**: Manages browser badge notifications and message handling
-3. **Popup Interface**: Provides status display and event history management
+3. **Popup Interface**: React-based UI with context-managed state for status display and event history
 
 When an email address is detected in a ChatGPT prompt, the extension:
 - Prevents the prompt from being submitted
@@ -29,6 +29,7 @@ When an email address is detected in a ChatGPT prompt, the extension:
 ## Technology Stack
 
 - **Frontend**: React 19 with TypeScript
+- **State Management**: React Context API for event history
 - **Build Tool**: Webpack 5
 - **Extension API**: Chrome Extension Manifest V3
 - **Storage**: Chrome Storage API
@@ -98,12 +99,17 @@ src/
 │   └── badge-helper.js # Badge notification utilities
 ├── content/            # Content script for ChatGPT monitoring
 │   ├── index.js       # Content script entry point
-│   └── chat-gpt-text-monitor.js # Main monitoring logic
+│   └── chat-gpt-text-monitor.ts # Main monitoring logic for chatgpt prompts
 ├── popup/             # Extension popup interface
-│   ├── App.js        # Main React app component
-│   ├── index.js      # Popup entry point
-│   └── components/   # React components
-├── shared/           # Shared utilities
+│   ├── App.tsx       # Main React app component
+│   ├── index.tsx     # Popup entry point
+│   ├── StatusDisplay.tsx # Status display component
+│   └── history/      # Event history components
+│       ├── EventHistory.tsx # History list component
+│       ├── EventHistoryContext.tsx # Context provider for state management
+│       └── HistoryItem.tsx # Individual history item component
+├── shared/           # Shared utilities and types
+│   ├── action-types.ts # TypeScript type definitions for extension events
 │   └── html-helpers.js # DOM text extraction helpers
 └── assets/          # Static assets
 ```
