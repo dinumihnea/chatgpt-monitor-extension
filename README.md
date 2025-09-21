@@ -1,4 +1,4 @@
-# ChatGPT Monitor
+# ChatGPT Monitor - Experimental Chrome Extension
 
 ![ChatGPT Monitor Extension](images/screenshot-1.png)
 
